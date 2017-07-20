@@ -14,7 +14,7 @@ uWSGI will be installed from its sources with the support for multiple languages
 - open a terminal and `cd` into the uwsgi sources directory;
 - build the uwsgi binary:
 ```sh
-make PROFILE=nolang
+make nolang
 ```
 
 - generate the plugins, being sure to already have installed, for each plugin, its corresponding binary (e.g. `python3.5` or `python27`). In the case of various Python versions, execute:
@@ -52,7 +52,6 @@ Bonjour works thanks to Unbit uwsgi-bonjour, for further information check [here
 
 For more information on uWSGI _emperor_ mode refer to the [official documentation](http://uwsgi-docs.readthedocs.io/en/latest/Emperor.html). Before configuring uWSGI:
 - create a directory where to collect all the projects .ini configuration files (e.g. `~/uwsgi/vassals/`);
-- create a directory where to collect all the projects log files (e.g. `~/uwsgi/logs/`)
 
 Provided `emperor.ini` contains a sample configuration to run the uWSGI server in _emperor_ mode. Customize it with the paths to your vassals and plugins directories and to the emperor log file, plus any other setting/option you wish to run the emperor with. Then:
 - move the customised emperor configuration file to a convenient location:
