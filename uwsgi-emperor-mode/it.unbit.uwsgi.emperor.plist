@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>Disabled</key>
+    <false/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>Label</key>
+    <string>it.unbit.uwsgi.emperor</string>
+	<key>ProgramArguments</key>
+    <array>
+        <!-- change the following two lines -->
+        <string>/path/to/your/uwsgi/binary</string>
+        <string>/path/to/your/emperor/configfile.ini</string>
+    </array>
+</dict>
+</plist>
