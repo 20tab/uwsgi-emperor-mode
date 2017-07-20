@@ -59,7 +59,7 @@ Provided `emperor.ini` contains a sample configuration to run the uWSGI server i
 ```sh
 cp emperor.ini ~/uwsgi/
 ```
-Be careful not to put the emperor configuration file into the vassals configuration files directory.
+Be careful not to put the emperor configuration file into the vassals configuration files directory. Also note that the provided configuration file sets the emperor to use port 80, which must be available for the server to work.
 
 ### Vassals
 
