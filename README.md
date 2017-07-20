@@ -36,18 +36,17 @@ cp uwsgi /usr/local/bin/
 ### Bonjour
 
 This part is only meant for macOS and makes it possible to assign a custom domain to each project (e.g. `my_new_project.local/`):
-- clone or download the repository and `cd` in its directory;
 - compile the bonjour uWSGI plugin:
 
 ```sh
-uwsgi --build-plugin uwsgi-bonjour
+uwsgi --build-plugin https://github.com/unbit/uwsgi-bonjour
 ```
 - copy the plugin to the uWSGI plugins directory:
 
 ```sh
 cp bonjour_plugin.so ~/uwsgi/plugins/
 ```
-Code is taken from Unbit uwsgi-bonjour, for further information check [here](https://github.com/unbit/uwsgi-bonjour).
+Bonjour works thanks to Unbit uwsgi-bonjour, for further information check [here](https://github.com/unbit/uwsgi-bonjour).
 
 ### Emperor
 
