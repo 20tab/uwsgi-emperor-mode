@@ -38,11 +38,13 @@ cp uwsgi /usr/local/bin/
 This part is only meant for macOS and makes it possible to assign a custom domain to each project (e.g. `my_new_project.local/`):
 - clone or download the repository and `cd` in its directory;
 - compile the bonjour uWSGI plugin:
+
 ```sh
 uwsgi --build-plugin uwsgi-bonjour
 ```
 - copy the plugin to the uWSGI plugins directory:
-```shell
+
+```sh
 cp bonjour_plugin.so ~/uwsgi/plugins/
 ```
 Code is taken from Unbit uwsgi-bonjour, for further information check [here](https://github.com/unbit/uwsgi-bonjour).
@@ -55,7 +57,8 @@ For more information on uWSGI _emperor_ mode refer to the [official documentatio
 
 Provided `emperor.ini` contains a sample configuration to run the uWSGI server in _emperor_ mode. Customize it with the paths to your vassals and plugins directories and to the emperor log file, plus any other setting/option you wish to run the emperor with. Then:
 - move the customised emperor configuration file to a convenient location:
-```shell
+
+```sh
 cp emperor.ini ~/uwsgi/
 ```
 Be careful not to put the emperor configuration file into the vassals configuration files directory.
@@ -63,12 +66,15 @@ Be careful not to put the emperor configuration file into the vassals configurat
 ### Vassals
 
 The emperor needs to be told the language of each project, therefore make sure to indicate the corresponding plugin in each vassal configuration file:
+
 ```INI
 plugin = python35
 ```
+
 ##### Bonjour (macOS)
 
 In order to assign a custom domain to a project (e.g. `my_new_project.local/`), also include the following lines in the corresponding vassal configuration file:
+
 ```INI
 plugin = bonjour
 bonjour-register = name=%(project_name).local,cname=localhost
