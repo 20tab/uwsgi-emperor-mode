@@ -13,11 +13,14 @@ uWSGI will be installed from its sources with the support for multiple languages
 - extract the files in a local directory;
 - open a terminal and `cd` into the uwsgi sources directory;
 - build the uwsgi binary:
-```shell
+
+```sh
 make PROFILE=nolang
 ```
+
 - generate the plugins, being sure to already have installed, for each plugin, its corresponding binary (e.g. `python3.5` or `python27`). In the case of various Python versions, execute:
-```shell
+
+```sh
 PYTHON=python2.7 ./uwsgi --build-plugin "plugins/python python27"
 PYTHON=python3.6 ./uwsgi --build-plugin "plugins/python python36"
 ```
@@ -82,23 +85,29 @@ The emperor can now be launched both manually and automatically.
 ### Manual
 
 This is straightforward, just launch uWSGI as superuser and with the emperor configuration file:
-```shell
+
+```sh
 sudo uwsgi ~/uwsgi/emperor.ini
 ```
 
 ### Automatic (macOS)
 
 Provided `it.unbit.uwsgi.emperor.plist` is a sample property list file that instructs `launchd` to run the emperor as a daemon. Customize it with the paths to your `uwsgi` binary (e.g. `/usr/local/bin/uwsgi`) and to the configuration file (`~/uwsgi/emperor.ini`). Then move, as superuser, the property list file to its location, load it and start it:
-```shell
+
+```sh
 sudo cp it.unbit.uwsgi.emperor.plist /Library/LaunchDaemons/
 sudo launchctl load /Library/LaunchDaemons/it.unbit.uwsgi.emperor.plist
 sudo launchctl start /Library/LaunchDaemons/it.unbit.uwsgi.emperor.plist
 ```
+
 In case you need to stop the daemon:
-```shell
+
+```sh
 sudo launchctl stop /Library/LaunchDaemons/it.unbit.uwsgi.emperor.plist
 ```
+
 In case you need to unload the daemon:
-```shell
+
+```sh
 sudo launchctl unload /Library/LaunchDaemons/it.unbit.uwsgi.emperor.plist
 ```
