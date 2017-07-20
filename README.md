@@ -62,13 +62,13 @@ Be careful not to put the emperor configuration file into the vassals configurat
 ### Vassals
 
 The emperor needs to be told the language of each project, therefore make sure to indicate the corresponding plugin in each vassal configuration file:
-```ini
+```INI
 plugin = python35
 ```
 ##### Bonjour (macOS)
 
 In order to assign a custom domain to a project (e.g. `my_new_project.local/`), also include the following lines in the corresponding vassal configuration file:
-```ini
+```INI
 plugin = bonjour
 bonjour-register = name=%(project_name).local,cname=localhost
 socket = 127.0.0.1:0
