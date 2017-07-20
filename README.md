@@ -13,25 +13,23 @@ uWSGI will be installed from its sources with the support for multiple languages
 - extract the files in a local directory;
 - open a terminal and `cd` into the uwsgi sources directory;
 - build the uwsgi binary:
-
 ```sh
 make PROFILE=nolang
 ```
 
 - generate the plugins, being sure to already have installed, for each plugin, its corresponding binary (e.g. `python3.5` or `python27`). In the case of various Python versions, execute:
-
 ```sh
 PYTHON=python2.7 ./uwsgi --build-plugin "plugins/python python27"
 PYTHON=python3.6 ./uwsgi --build-plugin "plugins/python python36"
 ```
 - create a local directory where you intend to collect all your uWSGI plugins (e.g. `~/uwsgi/plugins/`);
 - copy **all** the plugins to the directory you have just created:
-```shell
+```sh
 cp python27_plugin.so ~/uwsgi/plugins/
 cp python36_plugin.so ~/uwsgi/plugins/
 ```
 - install the compiled uWSGI binary, e.g.:
-```shell
+```sh
 cp uwsgi /usr/local/bin/
 ```
 
@@ -40,7 +38,7 @@ cp uwsgi /usr/local/bin/
 This part is only meant for macOS and makes it possible to assign a custom domain to each project (e.g. `my_new_project.local/`):
 - clone or download the repository and `cd` in its directory;
 - compile the bonjour uWSGI plugin:
-```shell
+```sh
 uwsgi --build-plugin uwsgi-bonjour
 ```
 - copy the plugin to the uWSGI plugins directory:
