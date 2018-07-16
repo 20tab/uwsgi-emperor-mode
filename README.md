@@ -1,6 +1,6 @@
 # Definition
 
-This is a step-by-step guide to install and configure the uWSGI server in _emperor_ mode and with multiple language support. It is mainly intended for macOS environments but, excluding the parts related to bonjour and `launchd`, it can be adapted to other platforms.
+This is a step-by-step guide to install and configure the uWSGI server in _emperor_ mode and with multiple language support. It is mainly intended for macOS and Ubuntu environments but it can be adapted to other platforms.
 
 # Configuration
 
@@ -48,6 +48,26 @@ cp bonjour_plugin.so ~/uwsgi/plugins/
 ```
 Bonjour works thanks to Unbit uwsgi-bonjour, for further information check [here](https://github.com/unbit/uwsgi-bonjour).
 
+### Avahi
+
+This part is only meant for GNU/Linux and makes it possible to assign a custom domain to each project (e.g. `my_new_project.local/`):
+- install the libavahi-client development headers (e.g. with apt):
+
+```sh
+sudo apt install libavahi-client-dev
+```
+- compile the avahi uWSGI plugin:
+
+```sh
+uwsgi --build-plugin https://github.com/20tab/uwsgi-avahi
+```
+- copy the plugin to the uWSGI plugins directory:
+
+```sh
+cp avahi_plugin.so ~/uwsgi/plugins/
+```
+Avahi works thanks to 20tab uwsgi-avahi, for further information check [here](https://github.com/20tab/uwsgi-avahi).
+
 ### Emperor
 
 For more information on uWSGI _emperor_ mode refer to the [official documentation](http://uwsgi-docs.readthedocs.io/en/latest/Emperor.html). Before configuring uWSGI:
@@ -76,6 +96,17 @@ In order to assign a custom domain to a project (e.g. `my_new_project.local/`), 
 ```INI
 plugin = bonjour
 bonjour-register = name=%(project_name).local,cname=localhost
+socket = 127.0.0.1:0
+subscribe-to = 127.0.0.1:5005:%(project_name).local
+```
+
+##### Avahi (GNU/Linux)
+
+In order to assign a custom domain to a project (e.g. `my_new_project.local/`), also include the following lines in the corresponding vassal configuration file:
+
+```INI
+plugin = avahi
+avahi-register = %(project_name).local
 socket = 127.0.0.1:0
 subscribe-to = 127.0.0.1:5005:%(project_name).local
 ```
@@ -113,3 +144,27 @@ In case you need to unload the daemon:
 ```sh
 sudo launchctl unload /Library/LaunchDaemons/it.unbit.uwsgi.emperor.plist
 ```
+
+### Automatic (Ubuntu >= 15.04)
+
+Provided `emperor.uwsgi.service`, customize it with the paths to your `uwsgi` binary (e.g. `/usr/local/bin/uwsgi`) and to the configuration file (`~/uwsgi/emperor.ini`). Then move, as superuser, the service file to its location, load it and start it:
+
+```sh
+sudo cp emperor.uwsgi.service /etc/systemd/system/
+sudo systemctl start emperor.uwsgi.service
+sudo systemctl enable emperor.uwsgi.service
+```
+
+In case you need to stop the daemon:
+
+```sh
+sudo systemctl stop emperor.uwsgi.service
+```
+
+In case you need to disable the daemon:
+
+```sh
+sudo systemctl disable emperor.uwsgi.service
+```
+
+##### For other distros check [here](https://uwsgi-docs.readthedocs.io/en/latest/Management.html).
