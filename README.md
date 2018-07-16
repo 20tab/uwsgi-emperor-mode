@@ -1,6 +1,6 @@
 # Definition
 
-This is a step-by-step guide to install and configure the uWSGI server in _emperor_ mode and with multiple language support. It is mainly intended for macOS environments but, excluding the parts related to bonjour and `launchd`, it can be adapted to other platforms.
+This is a step-by-step guide to install and configure the uWSGI server in _emperor_ mode and with multiple language support. It is mainly intended for macOS and Ubuntu environments but it can be adapted to other platforms.
 
 # Configuration
 
