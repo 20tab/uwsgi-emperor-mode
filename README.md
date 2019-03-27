@@ -136,13 +136,20 @@ created from scratch.
 3. Delete and recreate, with the new `uwsgi` binary, all existing plugins
 (refer to the instructions above).
 
-4. Add the following line to `emperor.ini`:
-
-    ```ini
-    https = :443,/Users/filippo/uwsgi/ssl/cert.crt,/Users/filippo/uwsgi/ssl/cert.key
+4. Generate certificate files in a convenient location:
+    ```sh
+    openssl genrsa -out my_cert.key 2048
+    openssl req -new -key my_cert.key -out my_cert.csr
+    openssl x509 -req -days 365 -in my_cert.csr -signkey my_cert.key -out my_cert.crt
     ```
 
-5. If the following error occurs (e.g. when using the `requests` Python package):
+5. Add the following line to `emperor.ini`:
+
+    ```ini
+    https = :443,path-to-my_cert.crt,path-to-my_cert.key
+    ```
+
+6. If the following error occurs (e.g. when using the `requests` Python package):
 
     ```
     +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called.```
