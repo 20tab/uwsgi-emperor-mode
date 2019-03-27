@@ -115,7 +115,7 @@ sudo launchctl unload /Library/LaunchDaemons/it.unbit.uwsgi.emperor.plist
 ```
 
 
-### SSL/HTTPS support on macOS Mojave - EXPERIMENTAL
+# SSL/HTTPS support on macOS Mojave - EXPERIMENTAL
 
 In order to enable SSL/HTTPS support, uWSGI must be compiled accordingly.
 Therefore, any existing uWSGI installation/setup must be deleted and
