@@ -113,3 +113,43 @@ In case you need to unload the daemon:
 ```sh
 sudo launchctl unload /Library/LaunchDaemons/it.unbit.uwsgi.emperor.plist
 ```
+
+
+### SSL/HTTPS support on macOS Mojave - EXPERIMENTAL
+
+In order to enable SSL/HTTPS support, uWSGI must be compiled accordingly.
+Therefore, any existing uWSGI installation/setup must be deleted and
+created from scratch.
+
+1. Make sure `openssl` is installed and updated (e.g. via `brew`):
+
+    ```sh
+    brew install openssl && brew upgrade openssl
+    ```
+
+2. Download uWSGI source files and build like this:
+
+    ```sh
+    CFLAGS="-I/usr/local/opt/openssl/include" LDFLAGS="-L/usr/local/opt/openssl/lib" UWSGI_PROFILE_OVERRIDE=ssl=true make nolang
+    ```
+
+3. Delete and recreate, with the new `uwsgi` binary, all existing plugins
+(refer to the instructions above).
+
+4. Add the following line to `emperor.ini`:
+
+    ```ini
+    https = :443,/Users/filippo/uwsgi/ssl/cert.crt,/Users/filippo/uwsgi/ssl/cert.key
+    ```
+
+5. If the following error occurs (e.g. when using the `requests` Python package):
+
+    ```
+    +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called.```
+    ```
+ 
+     add a line to `emperor.ini` with:
+ 
+    ```ini
+    env = OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+    ```
